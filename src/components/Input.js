@@ -8,7 +8,14 @@ import sun from "../todo-app-main/images/icon-sun.svg"
 import { SortableItem } from "../components/SortableItem";
 
 function Input() {
-  const [tasks, setTasks] = useState([JSON.parse(localStorage.getItem("items"))]);
+  const [tasks, setTasks] = useState([
+    { key: Math.random() * 1234567890123456789, content: "Complete Online javascript course", activeTask: false },
+    { key: Math.random() * 1234567890123456789, content: "Jog around the park x3", activeTask: true },
+    { key: Math.random() * 1234567890123456789, content: "10 Minutes of meditaion", activeTask: true },
+    { key: Math.random() * 1234567890123456789, content: "Read for 1 hour", activeTask: true },
+    { key: Math.random() * 1234567890123456789, content: "Pick up groceries", activeTask: true },
+    { key: Math.random() * 1234567890123456789, content: "Complete Todo App on Frontend Mentor", activeTask: true },
+]);
   { localStorage.getItem("items") == null ? localStorage.setItem("items", "[]") : localStorage.setItem("items", JSON.stringify(tasks)) }
   const done = tasks.filter(filter => filter.activeTask == false);
   const active = tasks.filter(filter => filter.activeTask == true);
@@ -19,6 +26,7 @@ function Input() {
   const [filterd, setFilterd] = useState(tasks);
   const [activeFilter, setActiveFilter] = useState(false)
   const [count, setcount] = useState(filterd.length - done.length);
+  const [activeClass,setActiveClass] = useState("all")
 
   const hanldeMode = () => {
     if (mode != "light") {
@@ -107,17 +115,26 @@ function Input() {
                 <div>{count} items left</div>
                 <div>
                   <ul>
-                    <li onClick={() => {
+                    <li 
+                    className={activeClass=="all"?"active" :null}
+                    onClick={() => {
+                      setActiveClass("all")
                       setActiveFilter(true)
                       setFilterd(tasks)
 
                     }}>All</li>
-                    <li onClick={() => {
+                    <li 
+                     className={activeClass=="active"?"active" :null}
+                    onClick={() => {
+                      setActiveClass("active")
                       setActiveFilter(true)
                       setFilterd(active)
 
                     }}>Active</li>
-                    <li onClick={() => {
+                    <li 
+                   className={activeClass=="comp"?"active" :null}
+                    onClick={() => {
+                      setActiveClass("comp")
                       setActiveFilter(true)
                       setFilterd(done)
 
@@ -130,7 +147,9 @@ function Input() {
                   setcount(active.length)
 
 
-                }}>
+                }}
+                style={{cursor:"pointer"}}
+                >
                   Clear Completed
                 </div>
 
@@ -180,280 +199,3 @@ export default Input;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-body {
-  background-color: #fafafa;
-}
-
-.form-background {
-  background-image: url("./todo-app-main/images/bg-desktop-light.jpg");
-  height: 300px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: fixed;
-  width: 100vw;
-  z-index: -1;
-  top: 0;
-  left: 0;
-
-}
-
-.row {
-  max-width: 545px;
-  margin: auto !important;
-  color: black;
-}
-
-.col-12 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.container {
-  margin-top: 73px;
-}
-
-.input-container {
-  width: 100%;
-  position: relative;
-}
-
-.input-container span {
-  position: absolute;
-  top: 69px;
-  left: 24px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid #e8e8ea;
-  cursor: pointer;
-}
-
-.task span,
-.done span {
-  position: absolute;
-  top: 17px;
-  left: 24px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid #e8e8ea;
-  cursor: pointer;
-
-}
-
-.input-container span:hover,
-.task span:hover {
-  background: rgb(105, 188, 255);
-  background: linear-gradient(151deg, rgba(105, 188, 255, 1) 20%, rgba(168, 119, 247, 1) 75%);
-  border: none;
-}
-
-h1 {
-  font-family: 'Josefin Sans', sans-serif;
-  color: white;
-  letter-spacing: 14px;
-}
-
-input {
-  width: 100%;
-  margin-top: 50px !important;
-  height: 65px;
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  padding-left: 75px;
-  position: relative;
-}
-
-input[type=text],
-textarea {
-  caret-color: #5c76c0;
-}
-
-.task-container {
-  width: 100%;
-  background: white;
-  margin-top: 1rem;
-  border-radius: 4px;
-  min-height: 0px;
-  max-height: 387px;
-  box-shadow: 0px 3px 16px 4px rgba(229, 228, 236, 0.75);
-  -webkit-box-shadow: 0px 3px 16px 4px rgba(229, 228, 236, 0.75);
-  -moz-box-shadow: 0px 3px 16px 4px rgba(229, 228, 236, 0.75);
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.task,
-.done {
-  transform: translateY(1px) translateZ(0px);
-  border-bottom: 1px solid #e6e5ea;
-  padding: 1rem 75px;
-  color: #4c4b5b;
-  transform-origin: center;
-  max-height: 65px;
-  position: relative;
-}
-
-.done {
-  text-decoration: line-through;
-  color: grey;
-}
-
-.done span {
-  background: rgb(105, 188, 255);
-  background: linear-gradient(151deg, rgba(105, 188, 255, 1) 20%, rgba(168, 119, 247, 1) 75%);
-}
-
-.done span::before {
-  content: "";
-  background-image: url("./todo-app-main/images/icon-check.svg");
-  position: absolute;
-  width: 12px;
-  height: 14px;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 3px;
-  left: 4px;
-}
-
-body.dark {
-  background-color: #181824;
-}
-
-body.dark .form-background {
-  background-image: url("./todo-app-main/images/bg-desktop-dark.jpg");
-
-}
-
-body.dark .task-container {
-  background: #25273c;
-  box-shadow: 0px 3px 16px 4px #0e0e16;
-  -webkit-box-shadow: 0px 3px 16px 4px #0e0e16;
-  -moz-box-shadow: 0px 3px 16px 4px #0e0e16;
-}
-
-body.dark .task,
-body.dark .done {
-  border-bottom: 1px solid #37394e;
-  color: white;
-
-}
-
-body.dark .input-container span {
-
-  border: 2px solid #2e3045;
-
-}
-
-body.dark .task span,
-body.dark .done span {
-  border: 2px solid #2e3045;
-}
-
-body.dark input[type="text"] {
-  background-color: #26263e;
-  color: rgb(169, 160, 160);
-}
-
-
-
-.tasks-info {
-  width: 99%;
-  background: white;
-  height: 50px;
-  border-radius: 0px 0px 5px 5px;
-  box-shadow: -1px 6px 13px -2px rgba(229, 228, 236, 0.75);
-  -webkit-box-shadow: -1px 6px 13px -2px rgba(229, 228, 236, 0.75);
-  -moz-box-shadow: -1px 6px 13px -2px rgba(229, 228, 236, 0.75);
-  border-top: 1px solid #e6e5ea;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  color:#96959d ;
-}
-body.dark .tasks-info {
-
-  background: #25273c;
-  width: 100%;
-  height: 50px;
-  border-radius: 0px 0px 5px 5px;
-  box-shadow: -1px 6px 13px -2px #0e0e16;
-  -webkit-box-shadow: -1px 6px 13px -2px #0e0e16;
-  -moz-box-shadow: -1px 6px 13px -2px #0e0e16;
-  margin-top: 0px;
-  border-top: 1px solid #37394e;
-  color: #3c3d5b;
-
-}
-ul{
-  display: flex;
-  list-style: none;
-  align-items: center;
-  padding-top: 15px;
-  font-weight: bold;
-}
-li {
-  margin: 1rem;
-  cursor: pointer;
-}
-body,html{
-  overflow: hidden;
-}
-
-  .tasks-info{
-    font-size: 13px;
-  }
-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
-
-@media only screen and (max-width: 767px) {
-  ul{
-    display: none;
-  }
-}
-li.active{
-  color: #477be9;
-}
-li:hover{
-  color: black;
-}
