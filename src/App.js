@@ -1,21 +1,116 @@
-import { Provider } from "react-redux";
-import store from "./Store"
-import Input from "./components/Input";
+import { motion } from "framer-motion";
+import image from "./stats-preview-card-component-main/images/image-header-desktop.jpg";
+import { Container, Row, Col, Image } from 'react-bootstrap';
 function App() {
- return(
-  <Provider store={store}>
-    
-  <main>
-<Input/>
-<footer> Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="https://www.frontendmentor.io/profile/Saad-Hisham">Saad Hisham</a>.</footer>
-  </main>
-  </Provider>
+
+
+  return (
+    <main>
+
+
+      <Container>
+        <Row>
+          <Col xs={12} md={6}>
+            <div className="info-container">
+              <div>
+                <h1>
+                  <motion.span
+
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 0 } }}>Get
+                  </motion.span>
+
+                  <span className="lighted">
+
+                    <motion.span
+
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 0.2 } }}> &nbsp;insights
+                    </motion.span>
+
+                  </span>
+                  <motion.span
+
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 0.4 } }}>&nbsp;that&nbsp;
+                  </motion.span>
+
+
+                  <motion.span
+
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 0.6 } }}> help&nbsp;
+                  </motion.span>
+
+
+
+                  <motion.span
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 0.8 } }}>your&nbsp;
+                  </motion.span>
+
+                   
+                  <motion.span
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 1} }}>business&nbsp;
+                  </motion.span>
+                  
+                  
+                  <motion.span
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 1.2} }}>grow.
+                  </motion.span></h1>
+                <motion.p 
+                  initial={{ scale:0 }}
+                  animate={{ scale:1, transition: { duration: 2} }}
+                className="main-p"> Discover the benefits of data analytics and make better decisions regarding revenue, customer experience, and overall efficiency.</motion.p>
+              </div>
+              <div className="statics-container">
+                <motion.div
+                   initial={{ opacity: 0, y:50 }}
+                   animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 2 } }}
+                >
+                  <p>10k+</p>
+                  <p>companies</p>
+                </motion.div>
+
+                <motion.div
+                 initial={{ opacity: 0, y:50 }}
+                 animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 2.2 } }}
+                >
+                  <p>314</p>
+                  <p>templates</p>
+                </motion.div>
+
+                <motion.div
+                   initial={{ opacity: 0, y:50 }}
+                   animate={{ opacity: 1, y: 0, transition: { duration: .7, delay: 2.4 } }}
+                > 
+                  <p>12m+</p>
+                  <p>queries</p>
+                </motion.div>
+              </div>
+            </div>
+          </Col>
+          <Col xs={12} md={6} className="image-container">
+          
+            <motion.img src={image} alt="people working in office" 
+            initial={{ opacity: 0, x: 500 }}
+            animate={{ opacity: 1, x: 0, transition: { duration: 2, delay: 0 } }}
+            />
+           
+          </Col>
+        </Row>
+      </Container>
+
+
+
+
+    </main>
 
   );
 
 }
-
 export default App;
 
 
@@ -26,48 +121,3 @@ export default App;
 
 
 
-// // import { DndContext, closestCenter } from "@dnd-kit/core";
-// // import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
-// // import { useState } from "react";
-// // import { Col, Container, Row } from "react-bootstrap";
-// // import { SortableItem } from "./components/SortableItem";
-
-// // function App() {
-// //   const [languages,setLanguages] = useState(["javascript","python","typescript"])
-// //  return(
-// //   <DndContext
-// //   collisionDetection={closestCenter}
-// //   onDragEnd={handleDragEnd}
-// //   >
-// //     <Container>
-// // <h3>the best programming languages</h3>
-// /* <SortableContext
-// items={languages}
-// strategy={verticalListSortingStrategy}
-// > 
-//   // {JSON.parse(localStorage.getItem("items")).map(function(language){
-//   //   return(
-//   //     <SortableItem key={language} id={language}/>
-//   //   )
-//   // })}
-
-// // </SortableContext>
-// // </Container>
-// //   </DndContext>
-// //   );
-// //   function handleDragEnd(e){
-//     console.log("drag end called")
-//     const {active,over}=e;
-//     if(active.id !== over.id){
-//       setLanguages((items)=>{
-//         const activeIndex =items.indexOf(active.id);
-//         const overIndex =items.indexOf(over.id);
-//         localStorage.setItem("items",JSON.stringify(arrayMove(items,activeIndex,overIndex)))
-//        return arrayMove(items,activeIndex,overIndex);
-      
-// //       })
-// //     }
-// //   }
-// // }
-
-// // export default App;
